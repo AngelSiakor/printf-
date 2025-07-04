@@ -7,6 +7,21 @@ int _putchar(char c)
 {
         return write(1, &c, 1);
 }
+
+int print_str(char *s)
+{
+        int i = 0;
+        if (!s)
+                s = "(null)";
+
+        while (s[i])
+        {
+                _putchar(s[i]);
+                i++;
+        }
+        return i;
+}
+
 int print_reverse(char *s)
 {
     int len = 0;
