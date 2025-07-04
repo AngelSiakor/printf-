@@ -20,3 +20,17 @@ int print_reverse(char *s)
 
     return count;
 }
+int octal_num(int num)
+{
+        int i;
+        int count = 0;
+
+        if (num / 8)
+        {
+                count += octal_num(num / 8);
+        }
+        count += _putchar((num % 8) + '0');
+
+        return count;
+}
+
