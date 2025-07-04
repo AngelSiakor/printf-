@@ -33,4 +33,14 @@ int octal_num(int num)
 
         return count;
 }
+int print_unsigned(unsigned int num)
+{
+    int count = 0;
 
+    if (num / 10)
+        count += print_unsigned(num / 10);
+
+    count += _putchar((num % 10) + '0');
+
+    return count;
+}
