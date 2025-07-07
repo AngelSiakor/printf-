@@ -83,25 +83,33 @@ int print_unsigned(unsigned int num)
 }
 int print_hex(unsigned int num)
 {
-    int count = 0;
+    static int count = 0;
     char *hex = "0123456789abcdef";
 
     if (num / 16)
-        count += print_hex(num / 16);
+    {
+        count ++;
+	print_hex(num / 16);
+    }
 
-    count += _putchar(hex[num % 16]);
+    count ++;
+    _putchar(hex[num % 16]);
 
     return count;
 }
 int print_upper_hex(unsigned int num)
 {
-    int count = 0;
+    static int count = 0;
     char *hex = "0123456789ABCDEF";
 
     if (num / 16)
-        count += print_upper_hex(num / 16);
+    {
+        count ++;
+	print_upper_hex(num / 16);
+    }
 
-    count += _putchar(hex[num % 16]);
+    count ++;
+    _putchar(hex[num % 16]);
 
     return count;
 }
@@ -134,11 +142,13 @@ int print_float(double num, int precision)
 
 int print_pointer(void *ptr)
 {
-    int count = 0;
+    static  int count = 0;
     unsigned long addr = (unsigned long)ptr;
 
-    count += print_str("0x");
-    count += print_hex(addr);
+    count ++;
+    print_str("0x");
+    count ++;
+    print_hex(addr);
 
     return count;
 }
