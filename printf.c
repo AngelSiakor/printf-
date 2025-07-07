@@ -44,26 +44,24 @@ int print_num(int num)
 int print_reverse(char *s)
 {
     int len = 0;
-   int  count = 0;
 
     while (s[len])
         len++;
 
     for (int i = len - 1; i >= 0; i--)
-        count += _putchar(s[i]);
+         _putchar(s[i]);
 
-    return count;
+    return 0;
 }
-int octal_num(int num)
+int print_octal(int num)
 {
-        int i;
         int count = 0;
 
         if (num / 8)
         {
-                count += octal_num(num / 8);
+                count += print_octal(num / 8);
         }
-        count += _putchar((num % 8) + '0');
+        _putchar((num % 8) + '0');
 
         return count;
 }
@@ -123,6 +121,22 @@ int print_float(double num, int precision)
 	count += print_num(frac_int);
 	return count;
 }
+
+int print_binary(unsigned int num)
+{
+  	static int count = 0;
+
+    if (num / 2)
+    {
+	 count++;
+         print_binary(num / 2);
+    }
+
+    _putchar((num % 2) + '0');
+
+    return count;
+}
+
 
 int _printf(char *format, ...)
 {
@@ -198,7 +212,7 @@ int main()
 
 	len = _printf("Let's try to printf a simple sentence.\n");
 	_printf("Length: %d\n", len);
-	_printf("Name: %s, Score: %d, Grade: %c Point: %f %b  %x %u\n", str, num, 'A', -12.4, 21, 21, 4294967295);
+	_printf("Name: %s, Score: %d, Grade: %c Point: %f %b  %x %u %o \n", str, num, 'A', -12.4, 5, 10, 4294967295, 22);
 	_printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
 
 	return 0;
