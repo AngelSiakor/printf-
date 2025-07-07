@@ -59,3 +59,14 @@ int print_unsigned(unsigned int num)
 
     return count;
 }
+int print_binary(unsigned int num)
+{
+    int count = 0;
+
+    if (num / 2)
+        count += print_binary(num / 2);
+
+    count += _putchar((num % 2) + '0');
+
+    return count;
+}
