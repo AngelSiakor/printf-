@@ -22,6 +22,23 @@ int print_str(char *s)
         return i;
 }
 
+int print_num(int num)
+{
+	int count = 0;
+
+	if (num < 0)
+	{
+		count += _putchar('-');
+		num = -num;
+	}
+
+	if (num > 10)
+		count += print_num(num / 10);
+
+	count += _putchar((num % 10) + '0');
+	return count;
+}
+
 int print_reverse(char *s)
 {
     int len = 0;
@@ -59,3 +76,129 @@ int print_unsigned(unsigned int num)
 
     return count;
 }
+int print_hex(unsigned int num)
+{
+    int count = 0;
+    char *hex = "0123456789abcdef";
+
+    if (num / 16)
+        count += print_hex(num / 16);
+
+    count += _putchar(hex[num % 16]);
+
+    return count;
+}
+int print_upper_hex(unsigned int num)
+{
+    int count = 0;
+    char *hex = "0123456789ABCDEF";
+
+    if (num / 16)
+        count += print_hex(num / 16);
+
+    count += _putchar(hex[num % 16]);
+
+    return count;
+}
+int print_float(double num, int precision)
+{
+	int count = 0;
+	if (num < 0)
+	{
+		count += _putchar('-');
+		num = -num;
+	}
+
+	int int_part = (int)num;
+	count += print_num(int_part);
+	count += _putchar('.');
+	double frac = num - int_part;
+
+	for (int i = 0; i < precision; i++)
+		frac *= 10;
+	int frac_int = (int)(frac);
+
+	count += print_num(frac_int);
+	return count;
+}
+
+int _printf(char *format, ...)
+{
+	int i, printed = 0;
+	va_list args;
+
+	va_start(args, format);
+
+	for (i = 0; format[i] != 0; i++)
+	{
+		if (format[i] == '%' && format[i + 1] != '\0')
+		{
+			i++;
+			if (format[i] == 's')
+			{
+				printed += print_str(va_arg(args, char *));
+			}
+			else if (format[i] == 'd' || format[i] == 'i')
+			{
+				printed += print_num(va_arg(args, int));
+			}
+			else if (format[i] == 'f')
+			{
+				printed += print_float(va_arg(args, double), 2);
+			}
+			else if (format[i] == 'b')
+			{
+				printed += print_binary(va_arg(args, int));
+			}
+			else if (format[i] == 'u')
+			{
+				printed += print_unsigned(va_arg(args, unsigned int ));
+			}
+			else if (format[i] == 'x')
+			{
+				printed += print_hex(va_arg(args, unsigned int));
+			}
+			else if (format[i] == 'X')
+			{
+				printed += print_upper_hex(va_arg(args, unsigned int));
+			}
+			else if (format[i] == 'c')
+			{
+				printed += _putchar(va_arg(args, int));
+			}
+			else if (format[i] == '%')
+			{
+				printed += _putchar('%');
+			}
+			else
+			{
+
+				printed += _putchar('%');
+				printed += _putchar(format[i]);
+			}
+		}
+		else
+		{
+			printed += _putchar(format[i]);
+		}
+	}
+
+	va_end(args);
+	return printed;
+}
+int main()
+{
+	int len;
+	int num = 32102;
+	char str[] = "Mulbah";
+	double fot = 12.2;
+	unsigned int ui = (unsigned int)INT_MAX + 1024;
+
+	len = _printf("Let's try to printf a simple sentence.\n");
+	_printf("Length: %d\n", len);
+	_printf("Name: %s, Score: %d, Grade: %c Point: %f %b  %x %u\n", str, num, 'A', -12.4, 21, 21, 4294967295);
+	_printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
+
+	return 0;
+}
+
