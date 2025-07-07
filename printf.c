@@ -22,6 +22,24 @@ int print_str(char *s)
         return i;
 }
 
+int print_num(int num)
+{
+        int count = 0;
+
+        if (num < 0)
+        {
+                count += _putchar('-');
+                num = -num;
+        }
+
+        if (num > 10)
+                count += print_num(num / 10);
+
+        count += _putchar((num % 10) + '0');
+        return count;
+}
+
+
 int print_reverse(char *s)
 {
     int len = 0;
