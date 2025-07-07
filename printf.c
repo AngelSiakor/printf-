@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
+#include <limits.h>
+
 
 int _putchar(char c)
 {
