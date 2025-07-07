@@ -13,4 +13,5 @@ int print_binary(unsigned int num);
 int print_hex(unsigned int num);
 int print_upper_hex(unsigned int num);
 int print_unsigned(unsigned int num);
+int print_pointer(void *ptr);
 #endif 
