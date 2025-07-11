@@ -13,10 +13,8 @@ int _putchar(char c)
 int print_str(char *s)
 {
         int i = 0;
-        if (!s)
-                s = "(null)";
 
-        while (s[i])
+        while (s[i] != '\0')
         {
                 _putchar(s[i]);
                 i++;
